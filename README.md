@@ -1,7 +1,7 @@
 # IFE_Level2
 2017 Baidu IFE Projects - Level 2
 
-task 1: 零基础 HTML 编码
+task 1: 零基础JavaScript编码（一）
 
 http://ife.baidu.com/course/detail/id/93
 
