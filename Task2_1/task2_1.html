@@ -21,10 +21,22 @@
         在事件处理函数中
         获取aqi-input输入的值，并显示在aqi-display中
         */
-       var text = document.getElementById("aqi-input");
-       var place = document.getElementById("aqi-display");
-       place.innerHTML = text.value;
+        var text = document.getElementById("aqi-input");
+        var place = document.getElementById("aqi-display");
+        place.innerHTML = text.value;
     })();
+    
+    // or
+
+    // (function() {
+    //     //js绑定点击事件
+    //     document.getElementById("button").onclick = function() {
+    //     //js获取input的内容值
+    //     var text = document.getElementById("aqi-input").value;
+    //     //js在页面span元素内添加文字
+    //     document.getElementById("aqi-display").innerHTML = text;
+    //     }
+    // })();
     </script>
 </body>
 
