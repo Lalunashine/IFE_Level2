@@ -13,3 +13,8 @@ http://ife.baidu.com/course/detail/id/91
 
 http://lalunashine.github.io/IFE_Level2/Task2_2/task2_2.html
 
+task 3: 零基础JavaScript编码（三）
+
+http://ife.baidu.com/course/detail/id/98
+
+http://lalunashine.github.io/IFE_Level2/Task2_3/task2_3.html
