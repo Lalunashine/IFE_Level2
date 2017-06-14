@@ -20,3 +20,8 @@ http://ife.baidu.com/course/detail/id/98
 http://lalunashine.github.io/IFE_Level2/Task2_3/task2_3.html
 
 
+task 4: 基础JavaScript练习（一）
+
+http://ife.baidu.com/course/detail/id/103
+
+http://lalunashine.github.io/IFE_Level2/Task2_4/task2_4.html
