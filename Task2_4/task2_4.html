@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>task 2_4</title>
+    <style type="text/css">
+    li {
+        background-color: red;
+        color: white;
+        display: inline-block;
+        list-style: none;
+        margin: 0 5px;
+        padding: 2px;
+    }
+    </style>
+</head>
+
+<body>
+    <form>
+        <input type="text" id="input">
+        <input type="button" id="leftIn" name="button" value="左侧入">
+        <input type="button" id="rightIn" name="button" value="右侧入">
+        <input type="button" id="leftOut" name="button" value="左侧出">
+        <input type="button" id="rightOut" name="button" value="右侧出">
+    </form>
+    <ul id="ul">
+    </ul>
+
+    <script type="text/javascript">
+    window.onload = function() {
+    	var input = document.getElementById("input");
+    	var ul = document.getElementById('ul');
+
+        function inputCheck() {
+            if (input.value == "") {
+                alert("Please input a number");
+             	input.focus();
+            } else if (isNaN(input.value)) {
+            	alert("Please input a NUMBER");
+            	input.focus();              
+            }
+            else {
+                console.log(input.value);
+              	input.focus();
+                return true;
+            }          
+        };
+
+        function leftIn() {
+            var pass = inputCheck();
+            if (pass) {
+                var li = document.createElement('li');
+                var txt = document.createTextNode(input.value);
+                li.appendChild(txt);
+
+                var firstChild = ul.childNodes[0];
+                ul.insertBefore(li, firstChild);
+
+                input.value = "";
+            }
+        };
+
+        function rightIn() {
+            var pass = inputCheck();
+            if (pass) {
+                var li = document.createElement('li');
+                var txt = document.createTextNode(input.value);
+                li.appendChild(txt);
+
+                ul.appendChild(li); // only difference
+                input.value = "";
+            }
+        };
+
+        function leftOut() {
+            var ul = document.getElementById('ul');
+            var len = ul.childNodes.length;
+
+            if (len == 0) {
+                alert('No elements in queue');
+            } else {
+            	ul.removeChild(ul.childNodes[0]);
+            }
+            input.focus();	
+        };
+
+        function rightOut() {
+            var ul = document.getElementById('ul');
+            var len = ul.childNodes.length;
+ 
+            if (len == 0) {
+                alert('No elements in queue');
+            } else {
+                ul.removeChild(ul.lastChild);
+            }
+            input.focus();
+        };
+
+        var leftInBtn = document.getElementById('leftIn');
+        leftInBtn.onclick = leftIn;
+
+        var rightInBtn = document.getElementById('rightIn');
+        rightInBtn.onclick = rightIn;
+
+        var leftOutBtn = document.getElementById('leftOut');
+        leftOutBtn.onclick = leftOut;
+
+        var rightOutBtn = document.getElementById('rightOut');
+        rightOutBtn.onclick = rightOut;
+
+    };
+    </script>
+</body>
+
+</html>
