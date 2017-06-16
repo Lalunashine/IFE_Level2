@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>task 2_4</title>
+    <style type="text/css">
+    ul {
+        display: flex; 
+        /* work with height, marginTop to visualize number*/
+    }
+    
+    li {
+        background-color: red;
+        color: white;
+        width: 20px;
+        font-size: 12px;
+        text-align: center;
+        list-style: none;
+        margin: 0 5px;
+        padding: 2px;
+    }
+    </style>
+</head>
+
+<body>
+    <form>
+        <input type="text" id="input">
+        <input type="button" id="leftIn" name="button" value="左侧入">
+        <input type="button" id="rightIn" name="button" value="右侧入">
+        <input type="button" id="leftOut" name="button" value="左侧出">
+        <input type="button" id="rightOut" name="button" value="右侧出">
+    </form>
+
+    <ul id="ul"></ul> <!-- NO ENTER! 否则会影响 childnodes -->
+    
+    <form>
+        <input type="button" id="sort" name="button" value="sort">
+    </form>
+
+    <script type="text/javascript">
+    window.onload = function() {
+        var input = document.getElementById("input");
+        var ul = document.getElementById('ul');
+        // console.log(ul.children);
+
+        function inputCheck() {
+            if (input.value == "" || isNaN(input.value) || parseFloat(input.value) < 10 || parseFloat(input.value) > 100) { 
+                alert("Please input a NUMBER between 10 and 100");
+                input.value = ""; // clear input
+                input.focus(); // focus the input area
+            } else {
+                console.log("just type in " + input.value);
+                input.focus();
+                return true;
+            }
+        };
+
+        function comeIn(direction) {
+            var len = ul.childNodes.length;
+            if (len > 60) { // 60+ list bars
+                alert("No. of elements in queue is up to 60.")
+            } else {
+                var pass = inputCheck();
+                if (pass) {
+                    // a new list ready
+                    var li = document.createElement('li');
+                    var txt = document.createTextNode(input.value);
+                    var marginTop = 100 - parseFloat(input.value);
+                    li.appendChild(txt);
+                    li.style.height = input.value + "px";
+                    li.style.marginTop = marginTop + "px"; 
+
+                    // add list
+                    if (direction == "left") {
+                        var firstChild = ul.childNodes[0];
+                        ul.insertBefore(li, firstChild);
+                    } else {
+                        ul.appendChild(li);
+                    }
+                    input.value = "";
+                }
+            }
+        };
+
+        function goOut(direction) {
+            var len = ul.childNodes.length;
+            if (len == 0) { // ul is empty
+                alert('No elements in queue!');
+            } else {
+                if (direction == 'left') {
+                    ul.removeChild(ul.childNodes[0]);
+                } else {
+                    ul.removeChild(ul.lastChild);
+                }
+                input.focus();
+            }
+        }
+
+        function sortFn(data) {
+            var dataSorted = []; // final order
+            var dataOne = []; // digit-1
+            var dataTwo = []; // digit-2
+            var dataThree = []; // digit-3
+            for (var i = 0; i < data.length; i++) { // separate sorting based on # of digits
+                switch (data[i].length) {
+                    case 2:
+                        dataTwo.push(data[i]);
+                        break;
+                    case 3:
+                        dataThree.push(data[i]);
+                        break;
+                }
+            }
+            dataTwo.sort();
+            dataThree.sort();
+            dataSorted = dataTwo.concat(dataThree); // combine two arrays
+            return dataSorted;
+        }
+
+        function sortArray() {
+            var len = ul.childNodes.length;
+            if (len < 1) { // ul is empty
+                alert('No elements in queue!');
+            } else { 
+                var arr = new Array();
+                for (var i = 0; i < len; i++) { // store all numbers in an array
+                    arr[i] = ul.childNodes[i].innerText;
+                } 
+             
+                var sortedArr = sortFn(arr);
+                for (var i = 0; i < len; i++) { // update ul list: number, height, marginTop
+                    ul.childNodes[i].innerText = sortedArr[i];
+                    ul.childNodes[i].style.height = sortedArr[i] + "px";
+
+                    var marginTop = 101 - parseFloat(sortedArr[i]);
+                    ul.childNodes[i].style.marginTop = marginTop + "px";
+                } 
+            } // end if # of list > 1
+        }
+
+        var leftInBtn = document.getElementById('leftIn');
+        // leftInBtn.onclick = leftIn; // before
+        leftInBtn.onclick = function() {
+            comeIn('left');
+        };
+
+        var rightInBtn = document.getElementById('rightIn');
+        rightInBtn.onclick = function() {
+            comeIn('right');
+        }
+
+        var leftOutBtn = document.getElementById('leftOut');
+        leftOutBtn.onclick = function() {
+            goOut('left');
+        };
+
+        var rightOutBtn = document.getElementById('rightOut');
+        rightOutBtn.onclick = function() {
+            goOut('left');
+        };
+
+        var sortBtn = document.getElementById('sort');
+        sortBtn.onclick = sortArray;
+    };
+    </script>
+</body>
+
+</html>
