@@ -48,7 +48,7 @@
             if (input.value == "" || isNaN(input.value) || parseFloat(input.value) < 10 || parseFloat(input.value) > 100) { 
                 alert("Please input a NUMBER between 10 and 100");
                 input.value = ""; // clear input
-                input.focus(); // focus the input area
+                input.focus(); // focus on the input area
             } else {
                 console.log("just type in " + input.value);
                 input.focus();
@@ -71,7 +71,7 @@
                     li.style.height = input.value + "px";
                     li.style.marginTop = marginTop + "px"; 
 
-                    // add list
+                    // add list into ul
                     if (direction == "left") {
                         var firstChild = ul.childNodes[0];
                         ul.insertBefore(li, firstChild);
