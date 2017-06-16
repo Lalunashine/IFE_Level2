@@ -25,3 +25,10 @@ task 4: 基础JavaScript练习（一）
 http://ife.baidu.com/course/detail/id/103
 
 http://lalunashine.github.io/IFE_Level2/Task2_4/task2_4.html
+
+
+task 5: 基础JavaScript练习（二）
+
+http://ife.baidu.com/course/detail/id/105
+
+http://lalunashine.github.io/IFE_Level2/Task2_5/task2_5.html
