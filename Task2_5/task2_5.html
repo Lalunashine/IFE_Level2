@@ -6,7 +6,7 @@
     <title>task 2_5</title>
     <style type="text/css">
     ul {
-        display: flex; 
+        display: flex;
         /* work with height, marginTop to visualize number*/
     }
     
@@ -31,13 +31,11 @@
         <input type="button" id="leftOut" name="button" value="左侧出">
         <input type="button" id="rightOut" name="button" value="右侧出">
     </form>
-
-    <ul id="ul"></ul> <!-- NO ENTER! 否则会影响 childnodes -->
-    
+    <ul id="ul"></ul>
+    <!-- NO ENTER! 否则会影响 childnodes -->
     <form>
         <input type="button" id="sort" name="button" value="sort">
     </form>
-
     <script type="text/javascript">
     window.onload = function() {
         var input = document.getElementById("input");
@@ -45,7 +43,7 @@
         // console.log(ul.children);
 
         function inputCheck() {
-            if (input.value == "" || isNaN(input.value) || parseFloat(input.value) < 10 || parseFloat(input.value) > 100) { 
+            if (input.value == "" || isNaN(input.value) || parseFloat(input.value) < 10 || parseFloat(input.value) > 100) {
                 alert("Please input a NUMBER between 10 and 100");
                 input.value = ""; // clear input
                 input.focus(); // focus on the input area
@@ -69,7 +67,7 @@
                     var marginTop = 100 - parseFloat(input.value);
                     li.appendChild(txt);
                     li.style.height = input.value + "px";
-                    li.style.marginTop = marginTop + "px"; 
+                    li.style.marginTop = marginTop + "px";
 
                     // add list into ul
                     if (direction == "left") {
@@ -89,8 +87,10 @@
                 alert('No elements in queue!');
             } else {
                 if (direction == 'left') {
+                    alert('Delete the first element in queue: ' + ul.childNodes[0].innerText);
                     ul.removeChild(ul.childNodes[0]);
                 } else {
+                    alert('Delet the last element in queue: ' + ul.lastChild.innerText);
                     ul.removeChild(ul.lastChild);
                 }
                 input.focus();
@@ -122,20 +122,20 @@
             var len = ul.childNodes.length;
             if (len < 1) { // ul is empty
                 alert('No elements in queue!');
-            } else { 
+            } else {
                 var arr = new Array();
                 for (var i = 0; i < len; i++) { // store all numbers in an array
                     arr[i] = ul.childNodes[i].innerText;
-                } 
-             
+                }
+
                 var sortedArr = sortFn(arr);
                 for (var i = 0; i < len; i++) { // update ul list: number, height, marginTop
                     ul.childNodes[i].innerText = sortedArr[i];
                     ul.childNodes[i].style.height = sortedArr[i] + "px";
 
-                    var marginTop = 101 - parseFloat(sortedArr[i]);
+                    var marginTop = 100 - parseFloat(sortedArr[i]);
                     ul.childNodes[i].style.marginTop = marginTop + "px";
-                } 
+                }
             } // end if # of list > 1
         }
 
@@ -157,11 +157,18 @@
 
         var rightOutBtn = document.getElementById('rightOut');
         rightOutBtn.onclick = function() {
-            goOut('left');
+            goOut('right');
         };
 
         var sortBtn = document.getElementById('sort');
         sortBtn.onclick = sortArray;
+
+        ul.addEventListener('click', function(e) { // add event on ul
+            if (e.target && e.target.nodeName == "LI") { // MUST LI, li will not work
+                alert('Delete the element you clicked: ' + e.target.innerText);
+                ul.removeChild(e.target); // e.target !!!
+            }
+        });
     };
     </script>
 </body>
