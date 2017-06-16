@@ -26,26 +26,24 @@
     </form>
     <ul id="ul">
     </ul>
-
     <script type="text/javascript">
     window.onload = function() {
-    	var input = document.getElementById("input");
-    	var ul = document.getElementById('ul');
+        var input = document.getElementById("input");
+        var ul = document.getElementById('ul');
 
         function inputCheck() {
             if (input.value == "") {
                 alert("Please input a number");
-             	input.focus();
+                input.focus();
             } else if (isNaN(input.value)) {
-            	alert("Please input a NUMBER");
-            	input.value = "";
-            	input.focus();              
-            }
-            else {
+                alert("Please input a NUMBER");
+                input.value = "";
+                input.focus();
+            } else {
                 console.log(input.value);
-              	input.focus();
+                input.focus();
                 return true;
-            }          
+            }
         };
 
         function leftIn() {
@@ -75,24 +73,24 @@
         };
 
         function leftOut() {
-            var ul = document.getElementById('ul');
             var len = ul.childNodes.length;
 
             if (len == 0) {
                 alert('No elements in queue');
             } else {
-            	ul.removeChild(ul.childNodes[0]);
+                alert('Delete the first element in queue: ' + ul.childNodes[0].innerText);
+                ul.removeChild(ul.childNodes[0]);
             }
-            input.focus();	
+            input.focus();
         };
 
         function rightOut() {
-            var ul = document.getElementById('ul');
             var len = ul.childNodes.length;
- 
+
             if (len == 0) {
                 alert('No elements in queue');
             } else {
+                alert('Delet the last element in queue: ' + ul.lastChild.innerText);
                 ul.removeChild(ul.lastChild);
             }
             input.focus();
@@ -110,6 +108,12 @@
         var rightOutBtn = document.getElementById('rightOut');
         rightOutBtn.onclick = rightOut;
 
+        ul.addEventListener('click', function(e) { // add event on ul
+            if (e.target && e.target.nodeName == "LI") { // MUST LI, li will not work
+                alert('Delete the element you clicked: ' + e.target.innerText);
+                ul.removeChild(e.target); // e.target !!!
+            }
+        });
     };
     </script>
 </body>
