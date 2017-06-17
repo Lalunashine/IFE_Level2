@@ -56,7 +56,8 @@
 
         function comeIn(direction) {
             var len = ul.childNodes.length;
-            if (len > 60) { // 60+ list bars
+            console.log();
+            if (len >= 60) { // 60+ list bars
                 alert("No. of elements in queue is up to 60.")
             } else {
                 var pass = inputCheck();
@@ -90,7 +91,7 @@
                     alert('Delete the first element in queue: ' + ul.childNodes[0].innerText);
                     ul.removeChild(ul.childNodes[0]);
                 } else {
-                    alert('Delet the last element in queue: ' + ul.lastChild.innerText);
+                    alert('Delete the last element in queue: ' + ul.lastChild.innerText);
                     ul.removeChild(ul.lastChild);
                 }
                 input.focus();
@@ -165,7 +166,7 @@
 
         ul.addEventListener('click', function(e) { // add event on ul
             if (e.target && e.target.nodeName == "LI") { // MUST LI, li will not work
-                alert('Delete the element you clicked: ' + e.target.innerText);
+                alert('Delete the element you just clicked: ' + e.target.innerText);
                 ul.removeChild(e.target); // e.target !!!
             }
         });
