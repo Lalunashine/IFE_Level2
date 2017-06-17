@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>task 2_6</title>
+    <style type="text/css">
+    li {
+        background-color: red;
+        color: white;
+        display: inline-block;
+        list-style: none;
+        margin: 0 5px;
+        padding: 2px;
+    }
+    </style>
+</head>
+
+<body>
+    <form>
+        <textarea id="input" cols="50" rows="10" placeholder="input here..."></textarea>
+        <input type="button" id="leftIn" name="button" value="左侧入">
+        <input type="button" id="rightIn" name="button" value="右侧入">
+        <input type="button" id="leftOut" name="button" value="左侧出">
+        <input type="button" id="rightOut" name="button" value="右侧出">
+    </form>
+    <form>
+        <input type="text" id="searchContent" placeholder="search something...">
+        <input type="button" id="search" name="button" value="搜索">
+    </form>
+    <ul id="ul"></ul>
+    <script type="text/javascript">
+    window.onload = function() {
+        var input = document.getElementById("input");
+        var ul = document.getElementById('ul');
+
+        function inputCheck() {
+            if (input.value == "") {
+                alert("Please input something");
+            } else {
+                return true;
+            }
+            input.focus();
+        };
+
+        function comeIn(direction) {
+            var pass = inputCheck();
+            if (pass) {
+                // only chinese char, english char, number; multi-match globally
+                var word = input.value.replace(/[^\u4e00-\u9fa5A-Za-z0-9]+/g, ' '); 
+                var wordArr = word.split(' ');
+                console.log(wordArr);
+
+                var firstChild = ul.childNodes[0]; // access 1st li so far
+                for (var i = 0; i < wordArr.length; i++) { // add each word
+                    var li = document.createElement('li');
+                    var txt = document.createTextNode(wordArr[i]);
+                    li.appendChild(txt);
+
+                    // add list into ul
+                    if (direction == "left") {
+                        ul.insertBefore(li, firstChild);
+                    } else {
+                        ul.appendChild(li);
+                    }
+                }
+                input.value = "";
+            }
+
+        };
+
+        function goOut(direction) {
+            var len = ul.childNodes.length;
+            if (len == 0) { // ul is empty
+                alert('No elements in queue!');
+            } else {
+                if (direction == 'left') {
+                    alert('Delete the first element in queue: ' + ul.childNodes[0].innerText);
+                    ul.removeChild(ul.childNodes[0]);
+                } else {
+                    alert('Delete the last element in queue: ' + ul.lastChild.innerText);
+                    ul.removeChild(ul.lastChild);
+                }
+                input.focus();
+            }
+        }
+
+        function search() {
+            var len = ul.childNodes.length;
+            if (len < 1) { // ul is empty
+                alert('No elements in queue!');
+            } else {
+                var lookFor = document.getElementById('searchContent').value; // locally work
+                var arr = new Array();
+                for (var i = 0; i < len; i++) { // store all list's content in an array
+                    arr[i] = ul.childNodes[i].innerText;
+
+                    var pos = arr[i].indexOf(lookFor);
+                    if (pos > -1) {
+                        ul.childNodes[i].style.backgroundColor = "green";
+                    } else {
+                        ul.childNodes[i].style.backgroundColor = "red";
+                    }   
+                }
+            }
+        }
+
+        var leftInBtn = document.getElementById('leftIn');
+        leftInBtn.onclick = function() {
+            comeIn('left');
+        };
+
+        var rightInBtn = document.getElementById('rightIn');
+        rightInBtn.onclick = function() {
+            comeIn('right');
+        }
+
+        var leftOutBtn = document.getElementById('leftOut');
+        leftOutBtn.onclick = function() {
+            goOut('left');
+        };
+
+        var rightOutBtn = document.getElementById('rightOut');
+        rightOutBtn.onclick = function() {
+            goOut('left');
+        };
+
+        var searchBtn = document.getElementById('search');
+        searchBtn.onclick = search;
+
+        ul.addEventListener('click', function(e) { // add event on ul
+            if (e.target && e.target.nodeName == "LI") { // MUST LI, li will not work
+                alert('Delete the element you just clicked: ' + e.target.innerText);
+                ul.removeChild(e.target); // e.target !!!
+            }
+        });
+    };
+    </script>
+</body>
+
+</html>
