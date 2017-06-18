@@ -3,14 +3,14 @@
 
 **Link Format**
 
-- task details - ife.baidu.com/course/detail/id/xx
+- task details - ife.baidu.com/course/detail/id/x
 
 - demo - lalunashine.github.io/IFE_Level2/Task2_y/task2_y.html
 
 
 **Task Summary**
 
-| task                      | details(xx)                                  | demo(y)   |
+| task                      | details(x)                                  | demo(y)   |
 | -------------             | :-------------:                                   | :-------------:| 
 | 1. 零基础JavaScript编码（一）| [- 93 -](http://ife.baidu.com/course/detail/id/93)| [- 1 -]( http://lalunashine.github.io/IFE_Level2/Task2_1/task2_1.html)|
 | 2. 零基础JavaScript编码（二）| [- 91 -](http://ife.baidu.com/course/detail/id/91)| [- 2 -]( http://lalunashine.github.io/IFE_Level2/Task2_2/task2_2.html)|
